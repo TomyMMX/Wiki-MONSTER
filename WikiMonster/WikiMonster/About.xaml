@@ -1,0 +1,40 @@
+﻿<phone:PhoneApplicationPage 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	x:Class="WikiMonster.About"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	Orientation="Portrait"
+	shell:SystemTray.IsVisible="True">
+
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="Wiki MONSTER" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<!--ContentPanel - place additional content here-->
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<StackPanel Orientation="Vertical" Margin="0" VerticalAlignment="Top">
+				<TextBlock Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" TextAlignment="Center"><Run Text="This simple app has te pourpose to be your daily companion."/><LineBreak/><Run Text="When you see the 'Wiki MONSTER' tile on the home screen it shows you a random"/><Run Text=" Wikipedia"/><Run Text=" article."/><LineBreak/><Run Text=" "/><LineBreak/><Run Text="If the picture or theme is attracting"/><Run Text=", you can open the app and read the article sum"/><Run Text="m"/><Run Text="ary and get a glimps at the pictures. If you stay intere"/><Run Text="s"/><Run Text="ted you can read the article in Internet Explorer."/><Run Text=" "/><LineBreak/><Run/><LineBreak/><Run Text="The application was developed by"/><Run Text=" "/></TextBlock>
+				<HyperlinkButton Click="goToLuknja" Content="Tomaž Toplak"/>
+				<TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run/><LineBreak/><Run Text="If you have concernes about your privacy, please read the"/></TextBlock>
+					<HyperlinkButton Click="showPrivacy" Content="privacy policy."/>	
+			</StackPanel>
+			
+		</Grid>
+	</Grid>
+</phone:PhoneApplicationPage>
