@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
@@ -30,7 +24,7 @@ namespace WikiMonster
         {
             InitializeComponent();
 
-            if (this.ApplicationBar.MenuItems.Count == 2 && System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en")
+            if (ApplicationBar.MenuItems.Count == 2 && System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en")
                 this.ApplicationBar.MenuItems.RemoveAt(0);
 
             ShakeGesturesHelper.Instance.ShakeGesture += new EventHandler<ShakeGestureEventArgs>(Instance_ShakeGesture);
@@ -40,7 +34,9 @@ namespace WikiMonster
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             this.DoubleTap += new EventHandler<System.Windows.Input.GestureEventArgs>(MainPage_DoubleTap);
-            ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 8;
+            ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 5;
+            ShakeGesturesHelper.Instance.ShakeMagnitudeWithoutGravitationThreshold = 0.25;
+
             ShakeGesturesHelper.Instance.Active = true;
         }
 
@@ -72,7 +68,7 @@ namespace WikiMonster
 
                 HelperMetjods.UpdateOrAdd(userSettings, "Articles", articles);
 
-                WikiParser.WikiArticleParser w = new WikiParser.WikiArticleParser(art.ArticleName, art.MainContent, art.ArticleLink, art.ImageLinks);
+                var w = new WikiParser.WikiArticleParser(art.ArticleName, art.MainContent, art.ArticleLink, art.ImageLinks);
 
                 HelperMetjods.UpdateCurrentArticleStorage(w);
 
@@ -162,8 +158,8 @@ namespace WikiMonster
             {
                 lock (IsolatedStorageSettings.ApplicationSettings)
                 {
-                    List<Article> articles = new List<Article>();
-                    Article art = new Article();
+                    var articles = new List<Article>();
+                    var art = new Article();
                     try
                     {
                         articles = (List<Article>)userSettings["Articles"];

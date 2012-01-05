@@ -33,5 +33,11 @@ namespace WikiMonster
         	Uri i = new Uri("/Privacy.xaml", UriKind.Relative);
             NavigationService.Navigate(i);
         }
+
+        private void reviewApp_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new MarketplaceReviewTask();
+            task.Show();
+        }
     }
 }

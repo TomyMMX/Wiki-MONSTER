@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010 Express for Windows Phone
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WikiMonster", "WikiMonster\WikiMonster.csproj", "{3DB4C8AA-13C6-4EEA-BF41-426BD519E077}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileScheduler", "TileScheduler\TileScheduler.csproj", "{170450D6-D1A0-45FD-B456-84135396E530}"

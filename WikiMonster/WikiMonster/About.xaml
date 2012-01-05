@@ -5,7 +5,7 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="WikiMonster.About"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,26 +14,30 @@
 	shell:SystemTray.IsVisible="True">
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
+	<Grid Background="Transparent">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		
 		<!--TitlePanel contains the name of the application and page title-->
-		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="Wiki MONSTER" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		<StackPanel Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock Text="Wiki MONSTER" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock Text="About" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
-		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+		<Grid Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel Orientation="Vertical" Margin="0" VerticalAlignment="Top">
-				<TextBlock Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" TextAlignment="Center"><Run Text="This simple app has te pourpose to be your daily companion."/><LineBreak/><Run Text="When you see the 'Wiki MONSTER' tile on the home screen it shows you a random"/><Run Text=" Wikipedia"/><Run Text=" article."/><LineBreak/><Run Text=" "/><LineBreak/><Run Text="If the picture or theme is attracting"/><Run Text=", you can open the app and read the article sum"/><Run Text="m"/><Run Text="ary and get a glimps at the pictures. If you stay intere"/><Run Text="s"/><Run Text="ted you can read the article in Internet Explorer."/><Run Text=" "/><LineBreak/><Run/><LineBreak/><Run Text="The application was developed by"/><Run Text=" "/></TextBlock>
+				<TextBlock Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" TextAlignment="Center"><Run Text="This simple app has t"/><Run Text="h"/><Run Text="e purpose to be your daily companion."/><LineBreak/><Run Text="When you see the '"/><Run FontWeight="Bold" Text="Wiki MONSTER"/><Run Text="' tile on the home screen it shows you a random"/><Run Text=" Wikipedia"/><Run Text=" article."/><LineBreak/><Run Text=" "/><LineBreak/><Run Text="If the picture or theme is attracting"/><Run Text=", you can open the app"/><Run Text=", "/><Run Text="read the article sum"/><Run Text="m"/><Run Text="ary and get a glimps"/><Run Text="e"/><Run Text=" "/><Run Text="of"/><Run Text=" the pictures. If you stay intere"/><Run Text="s"/><Run Text="ted you can read the article in Internet Explorer."/><Run Text=" "/><LineBreak/><Run/><LineBreak/><Run Text="The application was developed by"/><Run Text=" "/></TextBlock>
 				<HyperlinkButton Click="goToLuknja" Content="Tomaž Toplak"/>
-				<TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run/><LineBreak/><Run Text="If you have concernes about your privacy, please read the"/></TextBlock>
-					<HyperlinkButton Click="showPrivacy" Content="privacy policy."/>	
-			</StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                	<TextBlock VerticalAlignment="Center" Height="35"><Run Text="If you like the app, please"/></TextBlock>
+                	<Button VerticalAlignment="Center" MinHeight="35" Content="rate it" HorizontalAlignment="Center" Click="reviewApp_Click" Margin="0" Height="79" Width="172" />
+                </StackPanel>
+				<TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="If you have concerns about your privacy, please read the" Margin="0,20,0,0"/>
+				<HyperlinkButton Click="showPrivacy" Content="privacy policy."/>
+            </StackPanel>
 			
 		</Grid>
 	</Grid>
