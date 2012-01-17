@@ -34,8 +34,8 @@ namespace WikiMonster
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             this.DoubleTap += new EventHandler<System.Windows.Input.GestureEventArgs>(MainPage_DoubleTap);
-            ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 5;
-            ShakeGesturesHelper.Instance.ShakeMagnitudeWithoutGravitationThreshold = 0.25;
+            ShakeGesturesHelper.Instance.MinimumRequiredMovesForShake = 4;
+            ShakeGesturesHelper.Instance.ShakeMagnitudeWithoutGravitationThreshold = 0.8;
 
             ShakeGesturesHelper.Instance.Active = true;
         }
@@ -97,7 +97,6 @@ namespace WikiMonster
                 firstBootgrid.Visibility = Visibility.Collapsed;
 
                 App.ViewModel.ArticleName = App.ViewModel.wap.ArticleName;
-                App.ViewModel.ArticleBody = App.ViewModel.wap.MainContent;
                 App.ViewModel.ArticleLink = App.ViewModel.wap.ArticleLink;
 
                 try
@@ -107,11 +106,14 @@ namespace WikiMonster
                         ContentStack.Children.RemoveAt(0);
                     }
 
-                    TextBlock textBlock = (XamlReader.Load(App.ViewModel.ArticleBody) as TextBlock);
+                    TextBlock textBlock = (XamlReader.Load(App.ViewModel.wap.MainContent) as TextBlock);
                     ContentStack.Children.Insert(0, textBlock);
                     
                 }
-                catch { }
+                catch(Exception ex)
+                {
+                    int a = 1;
+                }
 
                 ImageStack.Children.Clear();
                 int i = 0;
@@ -123,6 +125,7 @@ namespace WikiMonster
                     image1.Width = 150;
                     Uri uri = new Uri(link, UriKind.Absolute);
                     image1.Source = new BitmapImage(uri);
+                    image1.MouseLeftButtonDown += image1_MouseLeftButtonDown;
 
                     ImageStack.Children.Add(image1);
                     i++;
@@ -150,6 +153,16 @@ namespace WikiMonster
                     WikiParser.WikiArticleParser wep = new WikiArticleParser(HelperMetjods.GetLanguage(), true);
                 }
             }
+        }
+
+        void image1_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+            string link = ((BitmapImage) ((Image) sender).Source).UriSource.AbsoluteUri;
+            HelperMetjods.UpdateOrAdd(userSettings, "BigImageLink", link.Replace("150px", "480px"));
+
+            Uri i = new Uri("/ImageShow.xaml", UriKind.Relative);
+            NavigationService.Navigate(i);
         }
 
         private void wep_Changedevent()
@@ -188,8 +201,6 @@ namespace WikiMonster
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-        
-
             loadData();
 
             Thread t = new Thread(() => {

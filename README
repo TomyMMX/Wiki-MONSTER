@@ -1,0 +1,15 @@
+Wiki MONSTER is the simple and sometimes addictive way to learn new stuff.
+
+Its tile sists in the home screen and shows random wikipedia articles. 
+If you find the picture or article name interesting it enables you to see the article summary and preview pictures.
+For further reading you can open the article in the browser.
+
+If you want more articles just shake the phone and it will show a new one.
+
+This app is the result of a 24 hour Windwos Phone Hackathon organized by Microsoft Slovenia.
+
+1.5 Update
+----------
+- Tap images to make them larger
+- Easyer to get new articles with phone shaking
+- Language defaults to sistem locale, but can be changed to english if desired

@@ -267,7 +267,7 @@ namespace WikiParser
                 }
                 catch { }
 
-                userSettings.Save();
+                //userSettings.Save();
             }
             if (Changedevent != null)            
                 Changedevent();
@@ -281,8 +281,12 @@ namespace WikiParser
             List<string> used = new List<string>();
             MainContent = MainContent.Replace("'", "");
             MainContent = HttpUtility.HtmlEncode(MainContent);
+            MainContent = MainContent.Replace("&amp;quot;", "\'");
+            MainContent = MainContent.Replace("&amp;nbsp;", "");
+            MainContent = MainContent.Replace("&amp;ndash;", "-");
             MainContent = MainContent.Replace("&quot;", "\'");
             MainContent = MainContent.Replace("&nbsp;", "");
+            MainContent = MainContent.Replace("&ndash;", "-");
             //MainContent = HttpUtility.HtmlDecode(MainContent);
 
             try
