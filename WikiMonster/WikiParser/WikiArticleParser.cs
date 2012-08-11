@@ -78,7 +78,7 @@ namespace WikiParser
             }
             page = HttpUtility.HtmlDecode(page);
             // "wgPageName": "Velika_nagrada_Nîmesa_1933", "wgTitle":
-            Regex guidRegex = new Regex("wgPageName\": \"[\\w-_%()–\\S—]*\",");
+            Regex guidRegex = new Regex("wgPageName\":\\s?\"[\\w-_%()–\\S—]*\",");
             Match m = guidRegex.Match(page);           
 
             string articleName = "";
@@ -89,14 +89,19 @@ namespace WikiParser
             }
             try
             {
-                articleName = articleName.Substring(14, articleName.Length - 14-(articleName.Length-articleName.LastIndexOf("\",")));
+                int where1 = GetNthIndex(articleName, '\"', 2);
+                int where2 = GetNthIndex(articleName, '\"', 3);
+
+                int len = articleName.Length - where1  - (articleName.Length - where2 + 1);
+
+                articleName = articleName.Substring(where1 + 1, len);
             }
             catch {
                 GetNewArticle(language);
                 return;
             }
             ArticleLink = string.Format("http://{0}.wikipedia.org/wiki/{1}", language, articleName);
-            Regex Regex2 = new Regex("\"wgTitle\": \"[\\w-_,%()\\s\\.–(\\w:)'(/(?<!\\)(?>\\\\)*/)°—™+]+\",");
+            Regex Regex2 = new Regex("\"wgTitle\":\\s?\"[\\w-_,%()\\s\\.–(\\w:)'(/(?<!\\)(?>\\\\)*/)°—™+]+\",");
             Match m2 = Regex2.Match(page);
             
             string article2Name = "";
@@ -105,14 +110,15 @@ namespace WikiParser
             {
                 article2Name = m2.Value;
             }
-            //
 
             if (string.IsNullOrEmpty(article2Name))
             {
                 GetNewArticle(language);
                 return;
             }
-            article2Name = article2Name.Substring(12, article2Name.Length - 12 - (article2Name.Length - article2Name.LastIndexOf("\",")));
+            int where = GetNthIndex(article2Name, '\"', 3);
+
+            article2Name = article2Name.Substring(where + 1, article2Name.Length - where - 1 - (article2Name.Length - article2Name.LastIndexOf("\",")));
 
             ArticleName = article2Name;
 
@@ -122,6 +128,24 @@ namespace WikiParser
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(client_DownloadStringCompleted22);
             client.DownloadStringAsync(new Uri(string.Format("http://{0}.wikipedia.org/w/api.php?action=query&prop=revisions&titles={1}&rvprop=content&redirects&format=xml", language, artlinkname)));
         }
+
+        public int GetNthIndex(string s, char t, int n)
+        {
+            int count = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == t)
+                {
+                    count++;
+                    if (count == n)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
 
         void client_DownloadStringCompleted22(object sender, DownloadStringCompletedEventArgs e)
         {   
@@ -134,6 +158,7 @@ namespace WikiParser
                 return;
             }
 
+            //our articles have to have pictures in them
             Regex Regex123 = new Regex("\\W[\\w]+:[\\w\\s_-]+(.jpg|.png|.svg)", RegexOptions.IgnoreCase);
             Match m = Regex123.Match(page);
 

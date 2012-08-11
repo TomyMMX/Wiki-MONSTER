@@ -1,4 +1,7 @@
 Wiki MONSTER is for everybody who wants to learn new stuff while using their phone.
+
 It uses live tiles to show you random Wikipedia articles. 
+
 If the tile grabs your attention you allready know more.
-New articlea are only a phone shake away.
+
+New articles are only a phone shake away.
